@@ -1,12 +1,13 @@
 import React from 'react'
 
-function Article() {
-	const body = <section>Its from varyable</section>
+function Article(props) {
+	const {article} = props //	деструкція
+	const body = <section>{article.text}</section>
 	return (
 		<div className='hello' style={{color:'red'}}>
-			<h2>title</h2>
+			<h2>{article.title}</h2>
 			{body}
-			<h3>create date: {(new Date()).toDateString()}</h3>
+			<h3>create date: {(new Date(article.date)).toDateString()}</h3>
 		</div>
 	)
 }

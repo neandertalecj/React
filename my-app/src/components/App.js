@@ -6,7 +6,7 @@ function App() {
 	return (
 		<div>
 			<h1>My app</h1>
-			<Article article={articles[0]}/>
+			<Article article = {articles[0]}/>
 		</div>
 	)
 }

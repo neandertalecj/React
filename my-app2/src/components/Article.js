@@ -38,7 +38,7 @@ class Article extends Component {
 		)
 	}
 	handleClick = () => {
-		console.log('---', 'clicked')
+		// console.log('---', 'clicked')
 		this.setState({
 			isOpen: !this.state.isOpen
 		})

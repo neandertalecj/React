@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>React-урок #5</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <div id="root1"></div>
+  <div id="root2"></div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.js"></script>
+  <!-- <script type="text/babel" src="app.jsx"></script> -->
+  <script type="text/babel">
+    ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById('root')
+    )
+
+    function SectionItem(){
+        return <section>This is section, not div</section>
+    }
+
+    ReactDOM.render(
+        <div>
+            <SectionItem/>
+            <SectionItem/>
+            <SectionItem/>
+        </div>,
+        document.getElementById('root1')
+    )
+  </script>
+</body>
+</html>

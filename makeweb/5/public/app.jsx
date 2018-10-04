@@ -259,4 +259,80 @@ class Profile extends React.Component {
     <Apppp />,
     document.getElementById('root5')
   )
+
+
+
+
+  class Clock extends React.Component {
+    constructor (props) {
+      super(props)
+      console.log('--- Clock ---', 1);
+      this.state = {
+        date: new Date()
+      }
+    }
+
+    componentDidMount(){
+      console.log(3)
+      this.timerId = setInterval( () => this.tick(), 1000)
+    }
+
+    componentWillUnmount() {
+      console.log(4)
+      clearInterval(this.timerId)
+    }
+
+    tick () {
+      this.setState({
+        date: new Date()
+      })
+    }
+
+    render() {
+      console.log(2)
+      return (
+        <div>
+          <h1>Its timer</h1>
+          <h2>It is {this.state.date.toLocaleTimeString()}</h2>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(
+    <Clock />,
+    document.getElementById('root6')
+  )
+
+
+
+
+    class Modal extends React.Component {
+      state = {modalVisibile: true}
+
+      toggleModalHendler = (e) => {
+        console.log(e.target)
+        console.log(this)
+        this.setState(
+          prevState => ({modalVisibile: !prevState.modalVisibile})
+        )
+      }
+
+      render() {
+        return (
+          <div>
+            {this.state.modalVisibile
+              ? <div className="modal">
+                  Some text is here
+                  
+                </div>
+              : null
+            }
+            <button onClick={this.toggleModalHendler}>Toggle Modal</button>
+          </div>
+        )
+      }
+    }
+
+  ReactDOM.render(<Modal />, document.getElementById('root7'))
   

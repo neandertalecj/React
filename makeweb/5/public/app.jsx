@@ -412,3 +412,123 @@ class Profile extends React.Component {
     <LoginControl />,
     document.getElementById('root8')
   )
+
+
+  const users = [
+    {
+      id:20,
+      name: "Aaron Abramovich",
+      speciality: 'Animator',
+      age: 29
+    },
+    {
+      id:21,
+      name: "Bob Marley",
+      speciality: 'singer',
+      age: 53
+    },
+    {
+      id:22,
+      name: "Sara Connor",
+      speciality: 'killer',
+      age: 40
+    },
+  ]
+
+  class AppLi extends React.Component {
+    render() {
+      return (
+        <div className="wraper">
+          {users.map(user => <Card key={user.id} {...user} />)}
+        </div>
+      )
+    }
+  }
+
+  const Card = (props) => {
+    const {id, name, speciality, age} = props
+    console.log(props)
+    return(
+      <div className="item">
+        <img src="http://i.pravatar.cc/300" alt=""/>
+        <h2>{name}</h2>
+        <p>Age: {age}</p>
+        <p>Speciality: {speciality}</p>
+      </div>
+    )
+  }
+
+  ReactDOM.render(
+    <AppLi />,
+    document.getElementById('root9')
+  )
+
+
+  class AppInp extends React.Component {
+    state = {value: ''}
+
+    handleChange = ({target: {value}}) => this.setState({value})
+
+    handleSubmit = () => alert('Aname was submited' + this.state.value)
+
+    render = () => (
+      <form>
+        <label>
+          <input type="text" value={this.state.value} onChange={this.handleChange}/>
+        </label>
+        <button type="button">send</button>
+      </form>
+    )
+  }
+
+  ReactDOM.render(
+    <AppInp />,
+    document.getElementById('root10')
+  )
+
+
+  class App2Handl extends React.Component {
+    state = {
+      studing: false,
+      grade: 2
+    }
+
+    handleChange = ({ target: { type, checked, value, name } }) => {
+      this.setState({
+        [name]: type === 'checkbox' ? checked : value
+      })
+    }
+
+    render = () => (
+      <form>
+        <label>
+          Is studying:
+
+          <input
+            name='studing'
+            type='checkbox'
+            checked={this.state.studying}
+            onChange={this.handleChange}
+          />
+        </label>
+
+        <br />
+
+        <label>
+          Your grade:
+
+          <input
+            name='grade'
+            type='number'
+            value={this.state.grade}
+            onChange={this.handleChange}
+          />
+        </label>
+      </form>
+    )
+  }
+
+  ReactDOM.render(
+    <App2Handl />,
+    document.getElementById('root11')
+  )

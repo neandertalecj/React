@@ -12,15 +12,16 @@ class TodoList extends Component {
                 <button submit="submit">Ok</button>
                 {/* <p>Hello </p> */}
                 {/* <Todo list={this.state.list} /> */}
-                <ul>
+                <ol>
                     {this.state.list.map(task => 
                         <li key={task.id}>
                             {/* {task.text} */}
                             <Todo task={task} 
-                                  onDelete={this.handleDelete} />
+                                  onDelete={this.handleDelete} 
+                                  onTextDecor={this.hendleTextDecor}/>
                         </li>)
                     }
-                </ul>
+                </ol>
             </form>
          )
     }
@@ -37,7 +38,17 @@ class TodoList extends Component {
     }
 
     handleDelete = (id) => {
-        const list = this.state.list.filter(task => task != id )
+        const list = this.state.list.filter(task => task.id !== id )
+        this.setState({list})
+    }
+
+    hendleTextDecor = (id) => {
+        const list = this.state.list.map(task => ({
+                id: task.id, 
+                text: task.text, 
+                lineThrough: (task.id === id) && (task.lineThrough = !task.lineThrough)
+            })
+        )
         this.setState({list})
     }
 }

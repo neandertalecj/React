@@ -9,9 +9,11 @@ class TodoList extends Component {
         return ( 
             <div>
                 <form onSubmit={this.handlerAdd}>
-                    <input type="text" id="inp"/>
-                    <button submit="submit">Ok</button>
-                
+                    <p>Task list</p>
+                    <div className="add-task">
+                        <input type="text" name='inp'/>
+                        <button submit="submit">Ok</button>
+                    </div>
                 </form>
                 <ol>
                     {this.state.list.map(task => 
@@ -26,14 +28,14 @@ class TodoList extends Component {
          )
     }
     handlerAdd = (e) => {
-        const text = document.getElementById('inp').value
+        e.preventDefault()
+        const text = e.target.inp.value
         const temp = this.state.list
         const index  = temp.length + 1
         temp.push({id: index, text: text, lineThrough: false})
 
         this.setState({list: temp})
 
-        e.preventDefault()
         e.target.reset()
     }
 
@@ -58,7 +60,7 @@ class TodoList extends Component {
             if (task.id === id) {
                 line = !line
             }
-            line = line
+            // line = line
             return ({
                 id: task.id, 
                 text: task.text, 

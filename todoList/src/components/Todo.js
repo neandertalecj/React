@@ -5,19 +5,18 @@ const decorate = ({ task: { lineThrough } }) => ({
 })
 
 const Todo = props => (
-            <li>
-                <span 
-                    style={decorate(props)}
-                    onClick={() => props.toggleTask(props.task.id)}
-                >
-                    {props.task.text}
-                </span>
-                <input 
-                    type="button" 
-                    onClick={() => props.onDelete(props.task.id)} 
-                    value="x"
-                />
-            </li>
+    <li>
+        <span 
+            style={decorate(props)}
+            onClick={() => props.toggleTask(props.task.id)}
+        >
+            {props.task.text}
+        </span>
+        <button 
+            type="button" 
+            onClick={() => props.deleteTask(props.task.id)} 
+        >x</button>
+    </li>
 )
  
 export default Todo

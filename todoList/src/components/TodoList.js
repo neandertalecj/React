@@ -12,19 +12,19 @@ class TodoList extends Component {
                 <form onSubmit={this.handlerAdd}>
                     <p>Task list</p>
                     <div className="add-task">
-                        <input type="text" name='inp'/>
+                        <input type="text" name='inp' required />
                         <button submit="submit">Ok</button>
                     </div>
                 </form>
                 <ol>
-                    {this.state.list.map(task => 
-                            <Todo 
-                                key={task.id}
-                                task={task} 
-                                onDelete={this.handleDelete} 
-                                onTextDecor={this.hendleTextDecor}/>
-                        )
-                    }
+                    {this.state.list.map(task => (
+                        <Todo 
+                            key={task.id}
+                            task={task} 
+                            onDelete={this.handleDelete} 
+                            toggleTask={this.toggleTask}
+                        />
+                    ))}
                 </ol>
             </div>
          )
@@ -62,21 +62,13 @@ class TodoList extends Component {
     //     this.setState({list})
     // }
 
-    hendleTextDecor = (id) => {
-        console.log(id)
-        const list = this.state.list.map(task => {
-            let line = task.lineThrough
-            if (task.id === id) {
-                line = !line
-            }
-            // line = line
-            return ({
-                id: task.id, 
-                text: task.text, 
-                lineThrough: line
-            })
-        })
-        this.setState({list})
+    static invertStatus = id => task => task.id === id
+    ? ({ ...task, lineThrough: !task.lineThrough })
+    : task
+
+    toggleTask = (id) => {
+        const list = this.state.list.map(TodoList.invertStatus(id))
+        this.setState({ list })
     }
 }
  

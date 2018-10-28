@@ -3,15 +3,63 @@ import nanoid from 'nanoid'
 import Todo from './Todo'
 
 class TodoList extends Component {
+    static invertStatus = id => task => task.id === id
+        ? ({ ...task, lineThrough: !task.lineThrough })
+        : task
+
     state = {
         list: []
     }
 
     componentDidMount() {
-        const list =  localStorage.todoList 
-            ? JSON.parse(localStorage.todoList)
+        const list = localStorage.getItem('todoList')
+            ? JSON.parse(localStorage.getItem('todoList'))
             : []
         this.setState({ list })
+    }
+
+    saveTaskList = (list) => {
+        localStorage.setItem('todoList', JSON.stringify(list))
+        this.setState({list})
+    }
+
+    addTask = e => {
+        e.preventDefault()
+ 
+        const list = [
+            ...this.state.list,
+            {
+                id: nanoid(),
+                text: e.target.task.value,
+                lineThrough: false
+            }
+        ]
+        this.saveTaskList(list)
+
+        e.target.reset()
+    }
+
+    deleteTask = id => {
+        const list = this.state.list.filter(task => task.id !== id)
+        this.saveTaskList(list)
+    }
+
+    // hendleTextDecor = (id) => {
+    //     const list = this.state.list.map(task => ({
+    //             id: task.id, 
+    //             text: task.text, 
+    //             //lineThrough: (task.id === id) && (task.lineThrough = !task.lineThrough)
+    //             lineThrough: (task.id === id) && (!task.lineThrough)
+    //         })
+    //     )
+    //     this.setState({list})
+    // }
+
+    
+
+    toggleTask = id => {
+        const list = this.state.list.map(TodoList.invertStatus(id))
+        this.saveTaskList(list)
     }
 
     render() { 
@@ -38,49 +86,7 @@ class TodoList extends Component {
          )
     }
 
-    addTask = e => {
-        e.preventDefault()
- 
-        const list = [
-            ...this.state.list,
-            {
-                id: nanoid(),
-                text: e.target.task.value,
-                lineThrough: false
-            }
-        ]
-        localStorage.todoList = JSON.stringify(list)
-        this.setState({list})
 
-        e.target.reset()
-    }
-
-    deleteTask = id => {
-        const list = this.state.list.filter(task => task.id !== id)
-        localStorage.todoList = JSON.stringify(list)
-        this.setState({ list })
-    }
-
-    // hendleTextDecor = (id) => {
-    //     const list = this.state.list.map(task => ({
-    //             id: task.id, 
-    //             text: task.text, 
-    //             //lineThrough: (task.id === id) && (task.lineThrough = !task.lineThrough)
-    //             lineThrough: (task.id === id) && (!task.lineThrough)
-    //         })
-    //     )
-    //     this.setState({list})
-    // }
-
-    static invertStatus = id => task => task.id === id
-        ? ({ ...task, lineThrough: !task.lineThrough })
-        : task
-
-    toggleTask = id => {
-        const list = this.state.list.map(TodoList.invertStatus(id))
-        localStorage.todoList = JSON.stringify(list)
-        this.setState({ list })
-    }
 }
  
 export default TodoList

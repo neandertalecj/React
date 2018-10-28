@@ -7,22 +7,22 @@ class TodoList extends Component {
     }
     render() { 
         return ( 
-            <form onSubmit={this.handlerAdd}>
-                <input type="text" id="inp"/>
-                <button submit="submit">Ok</button>
-                {/* <p>Hello </p> */}
-                {/* <Todo list={this.state.list} /> */}
+            <div>
+                <form onSubmit={this.handlerAdd}>
+                    <input type="text" id="inp"/>
+                    <button submit="submit">Ok</button>
+                
+                </form>
                 <ol>
                     {this.state.list.map(task => 
                         <li key={task.id}>
-                            {/* {task.text} */}
                             <Todo task={task} 
-                                  onDelete={this.handleDelete} 
-                                  onTextDecor={this.hendleTextDecor}/>
+                                onDelete={this.handleDelete} 
+                                onTextDecor={this.hendleTextDecor}/>
                         </li>)
                     }
                 </ol>
-            </form>
+            </div>
          )
     }
     handlerAdd = (e) => {
@@ -42,13 +42,29 @@ class TodoList extends Component {
         this.setState({list})
     }
 
+    // hendleTextDecor = (id) => {
+    //     const list = this.state.list.map(task => ({
+    //             id: task.id, 
+    //             text: task.text, 
+    //             lineThrough: (task.id === id) && (task.lineThrough = !task.lineThrough)
+    //         })
+    //     )
+    //     this.setState({list})
+    // }
     hendleTextDecor = (id) => {
-        const list = this.state.list.map(task => ({
+        console.log(id)
+        const list = this.state.list.map(task => {
+            let line = task.lineThrough
+            if (task.id === id) {
+                line = !line
+            }
+            line = line
+            return ({
                 id: task.id, 
                 text: task.text, 
-                lineThrough: (task.id === id) && (task.lineThrough = !task.lineThrough)
+                lineThrough: line
             })
-        )
+        })
         this.setState({list})
     }
 }

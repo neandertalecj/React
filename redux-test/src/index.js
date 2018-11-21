@@ -3,26 +3,35 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
+import reducer from './reducers'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-const initialState = [
-    'Smels like spirit',
-    'Enter Sandman'
-]
 
-function playlist(state = initialState, action) {
-    if (action.type === 'ADD_TRACK') {
-        return [
-            ...state,
-            action.payload
-        ]
-    }
-    return state
-}
+// const initialState = {
+    // tracks: [
+    //     'Smels like spirit',
+    //     'Enter Sandman'
+    // ],
+    // playlist: [
+    //     'My home playlist',
+    //     'My work playlistnpm'
+    // ]
 
-const store = createStore(playlist, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+// }
+
+// function playlist(state = initialState, action) {
+//     if (action.type === 'ADD_TRACK') {
+//         return {
+//             ...state,
+//             tracks :[...state.tracks, action.payload]
+//         }
+//     }
+//     return state
+// }
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
     <Provider store={store}>

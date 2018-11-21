@@ -1,6 +1,6 @@
 const initialState = [
-        'Smels like spirit',
-        'Enter Sandman'
+        // 'Smels like spirit',
+        // 'Enter Sandman'
     ]
 
 

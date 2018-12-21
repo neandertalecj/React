@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import './loadingHOC.css'
 
 const isEmpty = (prop) => (
     prop === null ||
@@ -10,7 +11,7 @@ const isEmpty = (prop) => (
 const LoadingHOC = (loadingProp) => (WraperComponent) => {
     return class LoadingHOC extends Component {
         render() {
-            console.log(this.props)
+            console.log(this.props.data)
             return isEmpty(this.props[loadingProp]) ?
             // <div className="loader" />
             <div className="loader">Here most be Preloading from css file with css-animation</div>

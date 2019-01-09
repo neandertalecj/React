@@ -1,0 +1,12 @@
+select{
+    margin-left: 20px;
+   background: transparent;
+   width: 60px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 29px;
+   /* -webkit-appearance: none; */
+}

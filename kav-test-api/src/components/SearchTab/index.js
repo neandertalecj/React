@@ -40,7 +40,6 @@ class SearchTab extends Component {
             const { searchQuery, hitsPerPage } = this.state
             this.setState({ page: 0 })
             this.fetchData(searchQuery, hitsPerPage, 0)
-            
         }
     }
 

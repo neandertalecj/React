@@ -8,6 +8,8 @@ import * as serviceWorker from './serviceWorker'
 import Home from './components/home/home'
 import Contacts from './components/contacts/comtacts'
 import Posts from './components/posts/posts'
+import Post from './components/post/post'
+import Error from './components/error/error'
 
 ReactDOM.render(
     <BrowserRouter>
@@ -15,7 +17,9 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/contacts" component={Contacts} />
-                <Route path="/posts" component={Posts} />
+                <Route exact path="/posts" component={Posts} />
+                <Route path='/posts/:id' component={Post} />
+                <Route path="*" component={Error} />
             </Switch>
         </App>
     </BrowserRouter>
